@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:13.4   # ou a versão que preferir
+    environment:
+      POSTGRES_DB: lanchonete   # Nome da base de dados que será criada automaticamente
+      POSTGRES_USER: username      # Nome do usuário
+      POSTGRES_PASSWORD: password  # Senha do usuário
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdatadb:/var/lib/postgresql/data
+volumes:
+  pgdatadb:
+    name: pgdata-volume
+networks:
+  database:
+    driver: bridge
