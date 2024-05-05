@@ -103,7 +103,7 @@ affinity: {}
 
 healthCheck:
   enabled: true
-  path: "/lanchonete-cliente/api/v1/api/v1/actuator/health/readiness"
+  path: "/lanchonete-cliente/api/v1/actuator/health/readiness"
   port: 8080
 
 env:
