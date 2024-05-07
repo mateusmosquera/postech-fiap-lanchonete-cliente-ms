@@ -1,4 +1,4 @@
-package br.com.fiap.lanchonete
+package br.com.fiap.lanchonete.cliente
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
@@ -8,8 +8,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing
 @EnableJpaAuditing
 @EnableFeignClients
 @SpringBootApplication
-class LanchoneteApplication
 
-fun main(args: Array<String>) {
-    runApplication<LanchoneteApplication>(*args)
+class LanchoneteClienteApplication{
+    fun main(args: Array<String>) {
+        runApplication<LanchoneteClienteApplication>(*args)
+    }
 }
+

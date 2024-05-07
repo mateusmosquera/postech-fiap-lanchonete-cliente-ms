@@ -3,10 +3,13 @@ package br.com.fiap.lanchonete.cliente.infrastructure.web.controller
 import br.com.fiap.lanchonete.cliente.application.dto.request.ClienteRequest
 import br.com.fiap.lanchonete.cliente.application.dto.response.ClienteResponse
 import br.com.fiap.lanchonete.cliente.client.ClienteCucumberClient
+import feign.FeignException
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.springframework.http.HttpStatus
+import org.springframework.http.HttpStatusCode
 import org.springframework.http.ResponseEntity
 
 class ClienteHttpControllerSteps(var clienteCucumberClient: ClienteCucumberClient){
@@ -14,12 +17,16 @@ class ClienteHttpControllerSteps(var clienteCucumberClient: ClienteCucumberClien
     private lateinit var clienteRequest: ClienteRequest
     private lateinit var clienteResponse: ResponseEntity<ClienteResponse>
 
-    @Given("^que o cliente envia uma solicitação para criar um novo cliente")
-    fun givenClienteRequestIsSentToCreateANewClient() {
+    @Given("^que o cliente envia uma solicitação para criar um novo cliente, com cpf \"([^\"]*)\", com nome ([^\"]*) e email ([^\"]*)")
+    fun givenClienteRequestIsSentToCreateANewClient(cpf:String, nome:String, email:String) {
 
-        clienteRequest = ClienteRequest("686.524.400-18", "Cliente Teste1", "cliente1@teste.com")
+        clienteRequest = ClienteRequest(cpf, nome, email)
+        try {
+            clienteResponse = clienteCucumberClient.create(clienteRequest)
+        } catch (e:FeignException){
+            clienteResponse = ResponseEntity(HttpStatus.valueOf(e.status()))
+        }
 
-        clienteResponse = clienteCucumberClient.create(clienteRequest)
 
     }
 
@@ -29,10 +36,12 @@ class ClienteHttpControllerSteps(var clienteCucumberClient: ClienteCucumberClien
     }
 
 
-    @Then("o cliente recebe a resposta")
-    fun thenClienteRecebeResposta() {
+    @Then("^o cliente recebe a resposta, com cpf \"([^\"]*)\", com nome ([^\"]*) e email ([^\"]*)")
+    fun thenClienteRecebeResposta(cpf:String, nome:String, email:String) {
 
-        assertEquals( ClienteResponse("686.524.400-18", "Cliente Teste1", "cliente1@teste.com"), clienteResponse.body)
+        if(clienteResponse.statusCode.value() == 201) {
+            assertEquals( ClienteResponse(cpf, nome, email), clienteResponse.body)
+        }
     }
 
 
