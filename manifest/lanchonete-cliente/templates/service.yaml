@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "lanchonete-cliente.fullname" . }}
+  labels:
+    {{- include "lanchonete-cliente.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "lanchonete-cliente.selectorLabels" . | nindent 4 }}
