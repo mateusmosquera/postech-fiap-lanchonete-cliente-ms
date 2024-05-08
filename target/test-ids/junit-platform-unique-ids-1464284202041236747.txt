@@ -1,0 +1,7 @@
+[engine:junit-jupiter]/[class:br.com.fiap.lanchonete.cliente.application.ClienteApplicationControllerTest]/[method:teste busca por cpf do cliente na layer application()]
+[engine:junit-jupiter]/[class:br.com.fiap.lanchonete.cliente.application.ClienteApplicationControllerTest]/[method:teste criacao do cliente na layer application()]
+[engine:junit-jupiter]/[class:br.com.fiap.lanchonete.cliente.domain.usecases.ClienteDomainUseCaseTest]/[method:Deve lancar BusinessException quando email ja estao()]
+[engine:junit-jupiter]/[class:br.com.fiap.lanchonete.cliente.domain.usecases.ClienteDomainUseCaseTest]/[method:Deve criar cliente quando CPF e e-mail nao estao em uso()]
+[engine:junit-jupiter]/[class:br.com.fiap.lanchonete.cliente.domain.usecases.ClienteDomainUseCaseTest]/[method:Deve lancar BusinessException quando cliente nao for encontrado por cpf()]
+[engine:junit-jupiter]/[class:br.com.fiap.lanchonete.cliente.domain.usecases.ClienteDomainUseCaseTest]/[method:Deve lancar BusinessException quando cpf ja esta em uso()]
+[engine:junit-jupiter]/[class:br.com.fiap.lanchonete.cliente.domain.usecases.ClienteDomainUseCaseTest]/[method:Deve buscar um cliente por cpf()]
