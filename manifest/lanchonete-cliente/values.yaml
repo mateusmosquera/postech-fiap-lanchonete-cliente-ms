@@ -108,4 +108,4 @@ healthCheck:
 
 env:
   - name: DATABASE_URL
-    value: "jdbc:postgresql://postgres-service:5432/lanchonete-cliente"
+    value: "jdbc:postgresql://lanchonete-cliente-db.cvwsi6meo8q2.us-east-1.rds.amazonaws.com:5432/lanchonete_cliente"
