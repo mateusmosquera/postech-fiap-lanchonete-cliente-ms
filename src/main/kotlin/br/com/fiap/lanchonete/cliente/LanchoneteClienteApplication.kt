@@ -9,9 +9,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing
 @EnableFeignClients
 @SpringBootApplication
 
-class LanchoneteClienteApplication{
+class LanchoneteClienteApplication
     fun main(args: Array<String>) {
         runApplication<LanchoneteClienteApplication>(*args)
     }
-}
+
 

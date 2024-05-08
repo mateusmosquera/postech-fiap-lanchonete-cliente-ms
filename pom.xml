@@ -12,7 +12,7 @@
     </parent>
 
     <artifactId>lanchonete-cliente-ms</artifactId>
-    <groupId>br.com.fiap</groupId>
+    <groupId>br.com.fiap.lanchonete.cliente</groupId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
