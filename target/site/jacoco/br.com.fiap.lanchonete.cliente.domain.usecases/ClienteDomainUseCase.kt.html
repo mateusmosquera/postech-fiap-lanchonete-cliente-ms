@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ClienteDomainUseCase.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">lanchonete-cliente-ms</a> &gt; <a href="index.source.html" class="el_package">br.com.fiap.lanchonete.cliente.domain.usecases</a> &gt; <span class="el_source">ClienteDomainUseCase.kt</span></div><h1>ClienteDomainUseCase.kt</h1><pre class="source lang-java linenums">package br.com.fiap.lanchonete.cliente.domain.usecases
+
+import br.com.fiap.lanchonete.cliente.application.gateway.ClienteRepositoryGateway
+import br.com.fiap.lanchonete.cliente.domain.entities.Cliente
+import br.com.fiap.lanchonete.cliente.domain.exception.ClienteExceptionEnum
+import br.com.fiap.lanchonete.exception.BusinessException
+import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
+
+@Service
+<span class="fc" id="L11">class ClienteDomainUseCase(private val clienteRepositoryGateway: ClienteRepositoryGateway) {</span>
+
+    @Transactional
+    fun create(cliente: Cliente): Cliente {
+
+<span class="fc bfc" id="L16" title="All 2 branches covered.">        if(clienteExists(cliente) == true) {</span>
+<span class="fc" id="L17">            throw BusinessException(ClienteExceptionEnum.CLIENTE_ALREADY_EXISTS_CPF)</span>
+        }
+
+<span class="fc bfc" id="L20" title="All 2 branches covered.">        if(emailExists(cliente) == true){</span>
+<span class="fc" id="L21">            throw BusinessException(ClienteExceptionEnum.CLIENTE_ALREADY_EXISTS_EMAIL)</span>
+        }
+
+<span class="fc" id="L24">        return clienteRepositoryGateway.save(cliente)</span>
+    }
+
+<span class="fc bfc" id="L27" title="All 2 branches covered.">    fun findByCpf(cpf: String) = clienteRepositoryGateway.findByCpf(cpf)</span>
+<span class="fc" id="L28">        ?: throw BusinessException(ClienteExceptionEnum.CLIENTE_NOT_FOUND)</span>
+
+<span class="pc bpc" id="L30" title="2 of 4 branches missed.">    fun clienteExists(cliente: Cliente?) = cliente?.cpf?.let { clienteRepositoryGateway.existsByCpf(it) }</span>
+
+<span class="pc bpc" id="L32" title="1 of 2 branches missed.">    fun emailExists(cliente: Cliente) = cliente.email?.let { clienteRepositoryGateway.existsByEmail(it) }</span>
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

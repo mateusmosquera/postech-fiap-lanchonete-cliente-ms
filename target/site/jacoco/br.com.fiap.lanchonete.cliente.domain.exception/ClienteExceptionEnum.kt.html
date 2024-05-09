@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ClienteExceptionEnum.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">lanchonete-cliente-ms</a> &gt; <a href="index.source.html" class="el_package">br.com.fiap.lanchonete.cliente.domain.exception</a> &gt; <span class="el_source">ClienteExceptionEnum.kt</span></div><h1>ClienteExceptionEnum.kt</h1><pre class="source lang-java linenums">package br.com.fiap.lanchonete.cliente.domain.exception
+
+import br.com.fiap.lanchonete.cliente.exception.dto.ResponseErrorDto
+import br.com.fiap.lanchonete.cliente.exception.enums.ExceptionEnum
+import org.springframework.http.HttpStatus
+
+<span class="fc" id="L7">enum class ClienteExceptionEnum(private val error: String,</span>
+<span class="fc" id="L8">                                private val httpStatusCode: HttpStatus) : ExceptionEnum {</span>
+
+<span class="fc" id="L10">    CLIENTE_NOT_FOUND(&quot;Cliente não encontrado.&quot;, HttpStatus.NOT_FOUND),</span>
+<span class="fc" id="L11">    CLIENTE_ALREADY_EXISTS_CPF(&quot;CPF já cadastrado para outro cliente.&quot;, HttpStatus.BAD_REQUEST),</span>
+<span class="fc" id="L12">    CLIENTE_ALREADY_EXISTS_EMAIL(&quot;Email já cadastrado para outro cliente.&quot;, HttpStatus.BAD_REQUEST);</span>
+
+    override fun getResponseError(): ResponseErrorDto {
+<span class="fc" id="L15">        return ResponseErrorDto(error = error, status = httpStatusCode.value())</span>
+    }
+
+<span class="nc" id="L18">}</span>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
