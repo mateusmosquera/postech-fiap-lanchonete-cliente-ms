@@ -6,6 +6,7 @@ import jakarta.validation.Valid
 import org.springframework.cloud.openfeign.FeignClient
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -26,4 +27,7 @@ interface ClienteCucumberClient {
     @GetMapping("/{cpf}")
     fun findByCpf(@PathVariable(required = true) cpf: String): ResponseEntity<ClienteResponse>
 
+
+    @DeleteMapping("/{cpf}")
+    fun deleteUserByCpf(@PathVariable(required = true) cpf: String): ResponseEntity<ClienteResponse>
 }

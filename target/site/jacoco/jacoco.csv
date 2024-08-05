@@ -4,11 +4,11 @@ lanchonete-cliente-ms,br.com.fiap.lanchonete.cliente.application.dto.request,Cli
 lanchonete-cliente-ms,br.com.fiap.lanchonete.cliente,LanchoneteClienteApplication,0,3,0,0,0,1,0,1,0,1
 lanchonete-cliente-ms,br.com.fiap.lanchonete.cliente,LanchoneteClienteApplicationKt,13,0,0,0,2,0,1,0,1,0
 lanchonete-cliente-ms,br.com.fiap.lanchonete.cliente.exception.handler,ExceptionHandler,0,40,0,0,0,6,0,3,0,3
-lanchonete-cliente-ms,br.com.fiap.lanchonete.cliente.infrastructure.web.controller,ClienteHttpController,0,59,0,0,0,5,0,3,0,3
-lanchonete-cliente-ms,br.com.fiap.lanchonete.cliente.domain.entities.extension,ClienteExtensionsKt,0,31,0,0,0,2,0,2,0,2
+lanchonete-cliente-ms,br.com.fiap.lanchonete.cliente.infrastructure.web.controller,ClienteHttpController,14,59,0,0,1,5,1,3,1,3
+lanchonete-cliente-ms,br.com.fiap.lanchonete.cliente.domain.entities.extension,ClienteExtensionsKt,0,32,0,0,0,2,0,2,0,2
 lanchonete-cliente-ms,br.com.fiap.lanchonete.cliente.domain.exception,ClienteExceptionEnum,2,59,0,0,1,6,1,3,1,3
 lanchonete-cliente-ms,br.com.fiap.lanchonete.cliente.application.dto.response,ClienteResponse,0,21,0,0,0,3,0,4,0,4
-lanchonete-cliente-ms,br.com.fiap.lanchonete.cliente.domain.usecases,ClienteDomainUseCase,4,98,3,9,0,10,3,8,0,5
+lanchonete-cliente-ms,br.com.fiap.lanchonete.cliente.domain.usecases,ClienteDomainUseCase,4,121,3,11,0,16,3,11,0,7
 lanchonete-cliente-ms,br.com.fiap.lanchonete.cliente.exception.dto,ResponseErrorDto,0,62,0,0,0,6,0,7,0,7
-lanchonete-cliente-ms,br.com.fiap.lanchonete.cliente.domain.entities,Cliente,17,49,0,0,0,9,5,5,5,5
-lanchonete-cliente-ms,br.com.fiap.lanchonete.cliente.application.controller,ClienteApplicationController,0,28,0,0,0,3,0,3,0,3
+lanchonete-cliente-ms,br.com.fiap.lanchonete.cliente.domain.entities,Cliente,39,160,3,3,3,19,12,9,9,9
+lanchonete-cliente-ms,br.com.fiap.lanchonete.cliente.application.controller,ClienteApplicationController,11,28,0,0,1,3,1,3,1,3

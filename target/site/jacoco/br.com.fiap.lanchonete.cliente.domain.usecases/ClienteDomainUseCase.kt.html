@@ -8,28 +8,43 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
-<span class="fc" id="L11">class ClienteDomainUseCase(private val clienteRepositoryGateway: ClienteRepositoryGateway) {</span>
+@Transactional(readOnly = true)
+<span class="fc" id="L12">class ClienteDomainUseCase(private val clienteRepositoryGateway: ClienteRepositoryGateway) {</span>
 
     @Transactional
     fun create(cliente: Cliente): Cliente {
 
-<span class="fc bfc" id="L16" title="All 2 branches covered.">        if(clienteExists(cliente) == true) {</span>
-<span class="fc" id="L17">            throw BusinessException(ClienteExceptionEnum.CLIENTE_ALREADY_EXISTS_CPF)</span>
-        }
+<span class="fc" id="L17">        validate(cliente)</span>
 
-<span class="fc bfc" id="L20" title="All 2 branches covered.">        if(emailExists(cliente) == true){</span>
-<span class="fc" id="L21">            throw BusinessException(ClienteExceptionEnum.CLIENTE_ALREADY_EXISTS_EMAIL)</span>
-        }
-
-<span class="fc" id="L24">        return clienteRepositoryGateway.save(cliente)</span>
+<span class="fc" id="L19">        return clienteRepositoryGateway.save(cliente)</span>
     }
 
-<span class="fc bfc" id="L27" title="All 2 branches covered.">    fun findByCpf(cpf: String) = clienteRepositoryGateway.findByCpf(cpf)</span>
-<span class="fc" id="L28">        ?: throw BusinessException(ClienteExceptionEnum.CLIENTE_NOT_FOUND)</span>
+    fun findByCpf(cpf: String): Cliente{
+<span class="fc" id="L23">        val cliente = clienteRepositoryGateway.findByCpf(cpf)</span>
+<span class="fc bfc" id="L24" title="All 4 branches covered.">        if(cliente?.ativo == true){</span>
+<span class="fc" id="L25">            return cliente</span>
+        }
+<span class="fc" id="L27">        throw BusinessException(ClienteExceptionEnum.CLIENTE_NOT_FOUND)</span>
+    }
 
 <span class="pc bpc" id="L30" title="2 of 4 branches missed.">    fun clienteExists(cliente: Cliente?) = cliente?.cpf?.let { clienteRepositoryGateway.existsByCpf(it) }</span>
 
 <span class="pc bpc" id="L32" title="1 of 2 branches missed.">    fun emailExists(cliente: Cliente) = cliente.email?.let { clienteRepositoryGateway.existsByEmail(it) }</span>
+
+    fun validate(cliente: Cliente) {
+<span class="fc bfc" id="L35" title="All 2 branches covered.">        if(clienteExists(cliente) == true) {</span>
+<span class="fc" id="L36">            throw BusinessException(ClienteExceptionEnum.CLIENTE_ALREADY_EXISTS_CPF)</span>
+        }
+
+<span class="fc bfc" id="L39" title="All 2 branches covered.">        if(emailExists(cliente) == true){</span>
+<span class="fc" id="L40">            throw BusinessException(ClienteExceptionEnum.CLIENTE_ALREADY_EXISTS_EMAIL)</span>
+        }
+<span class="fc" id="L42">    }</span>
+
+    @Transactional
+    fun deleteUserByCpf(cliente: Cliente) {
+<span class="fc" id="L46">        cliente.logicalRemove()</span>
+<span class="fc" id="L47">    }</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

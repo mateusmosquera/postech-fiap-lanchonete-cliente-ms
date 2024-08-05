@@ -5,6 +5,8 @@ import br.com.fiap.lanchonete.cliente.domain.entities.Cliente
 import br.com.fiap.lanchonete.cliente.domain.exception.ClienteExceptionEnum
 import br.com.fiap.lanchonete.exception.BusinessException
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertNotEquals
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -80,5 +82,19 @@ class ClienteDomainUseCaseTest {
         }
 
         assertEquals(ClienteExceptionEnum.CLIENTE_NOT_FOUND, exception.exceptionEnum)
+    }
+
+    @Test
+    fun `Devo inativar e ofuscar com um sha256 os dados do usuario`(){
+
+        assertEquals(cliente.nome,"Cliente Teste")
+        assertEquals(cliente.email,"cliente@teste.com")
+
+        clienteDomainUseCase.deleteUserByCpf(cliente)
+
+        assertNotEquals(cliente.nome,"Cliente Teste")
+        assertNotEquals(cliente.email,"cliente@teste.com")
+
+        cliente.ativo?.let { assertFalse(it) }
     }
 }

@@ -24,4 +24,4 @@ server:
   servlet:
     context-path: /lanchonete-cliente/api/v1
   host: http://localhost
-  port: 8080
+  port: 8180
