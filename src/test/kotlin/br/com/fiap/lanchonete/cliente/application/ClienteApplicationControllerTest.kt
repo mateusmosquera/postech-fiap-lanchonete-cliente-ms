@@ -53,4 +53,23 @@ class ClienteApplicationControllerTest {
 
         assertEquals(clienteResponse, result)
     }
+
+    @Test
+    fun `teste ofuscar o cliente na layer application`() {
+        val cpf = "123.456.789-09"
+        val cliente = Cliente(
+            id = 1,
+            cpf = "123.456.789-09",
+            email = "email@email.com",
+            nome = "Jonh Doe")
+        val clienteResponse = ClienteResponse(cpf = "123.456.789-09",
+            email = "email@email.com",
+            nome = "Jonh Doe")
+
+        `when`(clienteDomainUseCase.findByCpf(cpf)).thenReturn(cliente)
+
+        assertDoesNotThrow {
+            clienteApplicationController.deleteUserByCpf(cpf)
+        }
+    }
 }
