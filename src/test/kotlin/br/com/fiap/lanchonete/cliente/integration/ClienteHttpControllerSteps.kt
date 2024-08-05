@@ -64,4 +64,14 @@ class ClienteHttpControllerSteps(var clienteCucumberClient: ClienteCucumberClien
         assertEquals( ClienteResponse(cpf="123.456.789-09", nome="Cliente Teste", email="cliente@teste.com"), clienteResponse.body)
     }
 
+    @Given("que o cliente envia uma solicitacao para deletar as informacoes de um cliente pelo CPF")
+    fun givenClienteEnviaDeletar() {
+
+        clienteResponse = try {
+            clienteCucumberClient.deleteUserByCpf("123.456.789-09")
+        } catch (e:FeignException){
+            ResponseEntity(HttpStatus.valueOf(e.status()))
+        }
+    }
+
 }

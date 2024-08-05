@@ -1,6 +1,0 @@
-
-kotlin:S100"€Rename function "Deve criar cliente quando CPF e e-mail nao estao em uso" to match the regular expression ^[a-zA-Z][a-zA-Z0-9]*$(˜ğ¢çşÿÿÿÿ
-˜kotlin:S100)"€Rename function "Deve lancar BusinessException quando cpf ja esta em uso" to match the regular expression ^[a-zA-Z][a-zA-Z0-9]*$(¥Î³á
-˜kotlin:S1004"|Rename function "Deve lancar BusinessException quando email ja estao" to match the regular expression ^[a-zA-Z][a-zA-Z0-9]*$(¿Ëø¬øÿÿÿÿ
-~kotlin:S100@"gRename function "Deve buscar um cliente por cpf" to match the regular expression ^[a-zA-Z][a-zA-Z0-9]*$(‚µ÷Æ
-¨kotlin:S100J"Rename function "Deve lancar BusinessException quando cliente nao for encontrado por cpf" to match the regular expression ^[a-zA-Z][a-zA-Z0-9]*$(°’÷¸

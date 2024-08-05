@@ -1,6 +1,0 @@
-
-’kotlin:S100"vRename function "teste criacao do cliente na layer application" to match the regular expression ^[a-zA-Z][a-zA-Z0-9]*$(òë”ìøÿÿÿÿ
-˜kotlin:S100'"|Rename function "teste busca por cpf do cliente na layer application" to match the regular expression ^[a-zA-Z][a-zA-Z0-9]*$(éÊ¶Ëÿÿÿÿÿ
-gkotlin:S1192"ODefine a constant instead of duplicating this literal "123.456.789-09" 5 times.(î—æß
-gkotlin:S1192"PDefine a constant instead of duplicating this literal "email@email.com" 4 times.(¯ãá
-akotlin:S1192"IDefine a constant instead of duplicating this literal "Jonh Doe" 4 times.(€öÊË

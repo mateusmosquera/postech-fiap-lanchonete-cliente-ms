@@ -6,6 +6,7 @@ import br.com.fiap.lanchonete.cliente.application.dto.response.ClienteResponse
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -16,19 +17,24 @@ import org.springframework.web.util.UriComponentsBuilder
 
 @RestController
 @RequestMapping(&quot;/clientes&quot;)
-<span class="fc" id="L19">class ClienteHttpController(private val clienteService: ClienteApplicationController) {</span>
+<span class="fc" id="L20">class ClienteHttpController(private val clienteService: ClienteApplicationController) {</span>
 
     @PostMapping
     fun create(@Valid @RequestBody cliente: ClienteRequest,
                uriBuilder: UriComponentsBuilder): ResponseEntity&lt;ClienteResponse&gt; {
-<span class="fc" id="L24">        val clienteCreated = clienteService.create(cliente)</span>
-<span class="fc" id="L25">        val uri = uriBuilder.path(&quot;/api/v1/clientes/{cpf}&quot;).buildAndExpand(clienteCreated.cpf).toUri()</span>
-<span class="fc" id="L26">        return ResponseEntity.created(uri).body(clienteCreated)</span>
+<span class="fc" id="L25">        val clienteCreated = clienteService.create(cliente)</span>
+<span class="fc" id="L26">        val uri = uriBuilder.path(&quot;/api/v1/clientes/{cpf}&quot;).buildAndExpand(clienteCreated.cpf).toUri()</span>
+<span class="fc" id="L27">        return ResponseEntity.created(uri).body(clienteCreated)</span>
     }
 
     @GetMapping(&quot;/{cpf}&quot;)
     fun findByCpf(@PathVariable(required = true) cpf: String) =
-<span class="fc" id="L31">        ResponseEntity(clienteService.findByCpf(cpf = cpf), HttpStatus.OK)</span>
+<span class="fc" id="L32">        ResponseEntity(clienteService.findByCpf(cpf = cpf), HttpStatus.OK)</span>
+
+
+    @DeleteMapping(&quot;/{cpf}&quot;)
+    fun deleteUserByCpf(@PathVariable(required = true) cpf: String) =
+<span class="nc" id="L37">        ResponseEntity(clienteService.deleteUserByCpf(cpf = cpf), HttpStatus.NO_CONTENT)</span>
 
 }
 

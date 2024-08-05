@@ -8,6 +8,7 @@ import br.com.fiap.lanchonete.cliente.domain.entities.extension.toEntity
 import br.com.fiap.lanchonete.cliente.domain.usecases.ClienteDomainUseCase
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertDoesNotThrow
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
 
@@ -52,5 +53,24 @@ class ClienteApplicationControllerTest {
         val result = clienteApplicationController.findByCpf(cpf)
 
         assertEquals(clienteResponse, result)
+    }
+
+    @Test
+    fun `teste ofuscar o cliente na layer application`() {
+        val cpf = "123.456.789-09"
+        val cliente = Cliente(
+            id = 1,
+            cpf = "123.456.789-09",
+            email = "email@email.com",
+            nome = "Jonh Doe")
+        val clienteResponse = ClienteResponse(cpf = "123.456.789-09",
+            email = "email@email.com",
+            nome = "Jonh Doe")
+
+        `when`(clienteDomainUseCase.findByCpf(cpf)).thenReturn(cliente)
+
+        assertDoesNotThrow {
+            clienteApplicationController.deleteUserByCpf(cpf)
+        }
     }
 }

@@ -16,5 +16,8 @@ import org.springframework.stereotype.Service
     fun findByCpf(cpf: String): ClienteResponse =
 <span class="fc" id="L17">        clienteDomainUseCase.findByCpf(cpf).toDTO()</span>
 
+    fun deleteUserByCpf(cpf: String): Unit =
+<span class="nc" id="L20">        clienteDomainUseCase.deleteUserByCpf(clienteDomainUseCase.findByCpf(cpf))</span>
+
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
