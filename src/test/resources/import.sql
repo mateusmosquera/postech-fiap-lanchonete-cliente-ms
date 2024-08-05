@@ -1,1 +1,1 @@
-INSERT INTO "cliente" ("id","cpf", "nome", "email", "created_date", "update_date") VALUES (99,'123.456.789-09', 'Cliente Teste', 'cliente@teste.com','2024-05-05 17:25:07', '2024-05-05 17:25:07');
+INSERT INTO "cliente" ("id","cpf", "nome", "email", "ativo", "created_date", "update_date") VALUES (99,'123.456.789-09', 'Cliente Teste', 'cliente@teste.com', true ,'2024-05-05 17:25:07', '2024-05-05 17:25:07');

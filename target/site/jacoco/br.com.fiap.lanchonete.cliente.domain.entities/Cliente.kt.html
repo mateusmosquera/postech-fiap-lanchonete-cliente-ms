@@ -7,30 +7,46 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.SequenceGenerator
-import jakarta.validation.constraints.Email
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate
 import org.springframework.data.jpa.domain.support.AuditingEntityListener
+import java.security.MessageDigest
 import java.time.LocalDateTime
+import java.util.*
 
 @Entity
 @EntityListeners(AuditingEntityListener::class)
-<span class="fc" id="L18">data class Cliente(</span>
-<span class="pc" id="L19">    @Id</span>
+<span class="fc" id="L19">data class Cliente(</span>
+<span class="pc" id="L20">    @Id</span>
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = &quot;cliente_id_seq&quot;)
     @SequenceGenerator(name = &quot;cliente_id_seq&quot;, sequenceName = &quot;cliente_id_seq&quot;, allocationSize = 1)
     val id: Long?,
-<span class="fc" id="L23">    @Column(name = &quot;CPF&quot;, unique = true)</span>
-    val cpf: String?,
-<span class="fc" id="L25">    @Column(name = &quot;NOME&quot;)</span>
-    val nome: String?,
-<span class="fc" id="L27">    @Email</span>
-    @Column(name = &quot;EMAIL&quot;, unique = true)
-    val email: String?,
-<span class="pc" id="L30">    @CreatedDate</span>
+<span class="pc" id="L24">    @Column(name = &quot;CPF&quot;, unique = true)</span>
+<span class="nc" id="L25">    var cpf: String?,</span>
+<span class="pc" id="L26">    @Column(name = &quot;NOME&quot;)</span>
+<span class="nc" id="L27">    var nome: String?,</span>
+<span class="pc" id="L28">    @Column(name = &quot;EMAIL&quot;, unique = true)</span>
+<span class="nc" id="L29">    var email: String?,</span>
+<span class="pc" id="L30">    @Column(name = &quot;ATIVO&quot;)</span>
+<span class="pc" id="L31">    var ativo: Boolean? = true,</span>
+<span class="pc" id="L32">    @CreatedDate</span>
     @Column(name = &quot;created_date&quot;, nullable = false, updatable = false)
-<span class="pc" id="L32">    var createDate: LocalDateTime? = null,</span>
-<span class="pc" id="L33">    @LastModifiedDate</span>
+<span class="pc" id="L34">    var createDate: LocalDateTime? = null,</span>
+<span class="pc" id="L35">    @LastModifiedDate</span>
     @Column(name = &quot;update_date&quot;, nullable = false, updatable = false)
-<span class="pc" id="L35">    var updateDate: LocalDateTime? = null)</span>
+<span class="pc" id="L37">    var updateDate: LocalDateTime? = null){</span>
+
+    fun logicalRemove(){
+<span class="pc bpc" id="L40" title="1 of 2 branches missed.">        this.nome = nome?.let { hashString(it) }</span>
+<span class="pc bpc" id="L41" title="1 of 2 branches missed.">        this.email = email?.let { hashString(it) }</span>
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">        this.cpf = cpf?.let { hashString(it) }</span>
+<span class="fc" id="L43">        this.ativo = false</span>
+<span class="fc" id="L44">    }</span>
+
+    private fun hashString(input: String): String {
+<span class="fc" id="L47">        val inputString = UUID.randomUUID().toString() + input</span>
+<span class="fc" id="L48">        val bytes = MessageDigest.getInstance(&quot;SHA-256&quot;).digest(inputString.toByteArray())</span>
+<span class="fc" id="L49">        return bytes.joinToString(&quot;&quot;) { &quot;%02x&quot;.format(it) }</span>
+    }
+}
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

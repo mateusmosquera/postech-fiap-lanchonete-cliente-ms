@@ -8,11 +8,30 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
+@Transactional(readOnly = true)
 class ClienteDomainUseCase(private val clienteRepositoryGateway: ClienteRepositoryGateway) {
 
     @Transactional
     fun create(cliente: Cliente): Cliente {
 
+        validate(cliente)
+
+        return clienteRepositoryGateway.save(cliente)
+    }
+
+    fun findByCpf(cpf: String): Cliente{
+        val cliente = clienteRepositoryGateway.findByCpf(cpf)
+        if(cliente?.ativo == true){
+            return cliente
+        }
+        throw BusinessException(ClienteExceptionEnum.CLIENTE_NOT_FOUND)
+    }
+
+    fun clienteExists(cliente: Cliente?) = cliente?.cpf?.let { clienteRepositoryGateway.existsByCpf(it) }
+
+    fun emailExists(cliente: Cliente) = cliente.email?.let { clienteRepositoryGateway.existsByEmail(it) }
+
+    fun validate(cliente: Cliente) {
         if(clienteExists(cliente) == true) {
             throw BusinessException(ClienteExceptionEnum.CLIENTE_ALREADY_EXISTS_CPF)
         }
@@ -20,15 +39,11 @@ class ClienteDomainUseCase(private val clienteRepositoryGateway: ClienteReposito
         if(emailExists(cliente) == true){
             throw BusinessException(ClienteExceptionEnum.CLIENTE_ALREADY_EXISTS_EMAIL)
         }
-
-        return clienteRepositoryGateway.save(cliente)
     }
 
-    fun findByCpf(cpf: String) = clienteRepositoryGateway.findByCpf(cpf)
-        ?: throw BusinessException(ClienteExceptionEnum.CLIENTE_NOT_FOUND)
-
-    fun clienteExists(cliente: Cliente?) = cliente?.cpf?.let { clienteRepositoryGateway.existsByCpf(it) }
-
-    fun emailExists(cliente: Cliente) = cliente.email?.let { clienteRepositoryGateway.existsByEmail(it) }
+    @Transactional
+    fun deleteUserByCpf(cliente: Cliente) {
+        cliente.logicalRemove()
+    }
 
 }

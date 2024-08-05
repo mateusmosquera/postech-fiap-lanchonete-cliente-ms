@@ -16,4 +16,7 @@ class ClienteApplicationController(private val clienteDomainUseCase: ClienteDoma
     fun findByCpf(cpf: String): ClienteResponse =
         clienteDomainUseCase.findByCpf(cpf).toDTO()
 
+    fun deleteUserByCpf(cpf: String): Unit =
+        clienteDomainUseCase.deleteUserByCpf(clienteDomainUseCase.findByCpf(cpf))
+
 }
