@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Assertions.assertNotEquals
 import org.junit.jupiter.api.Assertions.assertThrows
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertDoesNotThrow
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.InjectMocks
 import org.mockito.Mock
@@ -96,5 +97,15 @@ class ClienteDomainUseCaseTest {
         assertNotEquals(cliente.email,"cliente@teste.com")
 
         cliente.ativo?.let { assertFalse(it) }
+    }
+
+    @Test
+    fun `Devo inativar e ofuscar com um sha256 os dados do usuario que tenha dados vazios`(){
+        val clienteNovo = Cliente(2L, null, null, null)
+        assertDoesNotThrow {
+            clienteDomainUseCase.deleteUserByCpf(clienteNovo)
+        }
+
+        clienteNovo.ativo?.let { assertFalse(it) }
     }
 }

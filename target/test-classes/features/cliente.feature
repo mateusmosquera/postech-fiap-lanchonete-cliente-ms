@@ -21,3 +21,13 @@ Feature: Gerenciamento de clientes via HTTP
     Examples:
       | status |
       | 200    |
+
+  @tagDelete
+  Scenario Outline: Recuperar informacoes de um cliente pelo CPF
+    Given que o cliente envia uma solicitacao para deletar as informacoes de um cliente pelo CPF
+    When  cliente recebe as informacoes com code status <status>
+
+    Examples:
+      | status |
+      | 204    |
+      | 404    |
