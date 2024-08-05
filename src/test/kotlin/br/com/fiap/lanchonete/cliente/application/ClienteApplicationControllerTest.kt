@@ -8,6 +8,7 @@ import br.com.fiap.lanchonete.cliente.domain.entities.extension.toEntity
 import br.com.fiap.lanchonete.cliente.domain.usecases.ClienteDomainUseCase
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertDoesNotThrow
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
 
