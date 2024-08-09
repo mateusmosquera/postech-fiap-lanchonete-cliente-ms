@@ -26,3 +26,13 @@ server:
     context-path: /lanchonete-cliente/api/v1
   port: 8080
   host: http://localhost
+
+app:
+  mq:
+    port: ${MQ_PORT:5672}
+    ssl: ${MQ_SSL:false}
+    cliente:
+      username: ${CLIENT_MQ_USERNAME:guest}
+      password: ${CLIENT_MQ_PASSWORD:src/main/resources/credentials/secret-password-broker-mq-queue}
+      brokerURL: ${CLIENT_MQ_HOST:localhost}
+      queueName: ${CLIENT_MQ_QUEUE_NAME:pedido-to-client-mq}

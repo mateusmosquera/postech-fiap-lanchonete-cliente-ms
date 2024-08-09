@@ -83,17 +83,16 @@ autoscaling:
   # targetMemoryUtilizationPercentage: 80
 
 # Additional volumes on the output Deployment definition.
-volumes: []
-# - name: foo
-#   secret:
-#     secretName: mysecret
-#     optional: false
+volumes:
+  - name: secret-password-broker-mq-queue-volume
+    secret:
+      defaultMode: 420
+      secretName: secret-password-broker-mq-queue
 
 # Additional volumeMounts on the output Deployment definition.
-volumeMounts: []
-# - name: foo
-#   mountPath: "/etc/foo"
-#   readOnly: true
+volumeMounts:
+  - name: secret-password-broker-mq-queue-volume
+    mountPath: /etc/credentials/secret-password-broker-mq-queue
 
 nodeSelector: {}
 
@@ -109,3 +108,15 @@ healthCheck:
 env:
   - name: DATABASE_URL
     value: "jdbc:postgresql://lanchonete-cliente-db.cvwsi6meo8q2.us-east-1.rds.amazonaws.com:5432/lanchonete_cliente"
+  - name: CLIENT_MQ_USERNAME
+    value: "guest-lanchonete"
+  - name: CLIENT_MQ_PASSWORD
+    value: "/etc/credentials/secret-password-broker-mq-queue/password"
+  - name: CLIENT_MQ_HOST
+    value: "b-f3cb747e-0f01-440e-b725-5639b5917326.mq.us-east-1.amazonaws.com"
+  - name: CLIENT_MQ_QUEUE_NAME
+    value: "pedido-to-client-mq"
+  - name: MQ_PORT
+    value: "5671"
+  - name: MQ_SSL
+    value: "true"
